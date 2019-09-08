@@ -1,0 +1,67 @@
+
+<div style="margin-bottom: 30px;">
+  <form [formGroup]="searchingForm"  (ngSubmit)="onSubmit()">
+    <div class="form">
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Введите значение для поиска" formControlName="username"></textarea>
+      </mat-form-field>
+<!--      <input id="username" formControlName="username">-->
+      <button [disabled]="searchingForm.invalid">find</button>
+    </div>
+      <div class="error">
+      <span class="form-help-text "
+            *ngIf="searchingForm.get('username').invalid && searchingForm.get('username').touched">
+        <span *ngIf="searchingForm.get('username')['errors']['required'] ">Значение для поиска не может быть пустым</span>
+        <span *ngIf="searchingForm.get('username')['errors']['minlength']
+        && searchingForm.get('username')['errors']['minlength']['requiredLength']">
+          Количество символов должно быть больше
+          {{ searchingForm.get('username')['errors']['minlength']['requiredLength'] }}.
+          Cейчас
+          {{ searchingForm.get('username')['errors']['minlength']['actualLength'] }} </span>
+      </span>
+    </div>
+
+  </form>
+</div>
+
+<div *ngIf="stateTable">
+
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="catchPaginationChangeEvent($event)">
+  </mat-paginator>
+</div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Id Column -->
+
+    <ng-container matColumnDef="id">
+      <th  mat-header-cell *matHeaderCellDef> id </th>
+      <td class="pointer" (click)="clickTr(element)" mat-cell *matCellDef="let element">
+        <span>{{element.id}}</span>   </td>
+    </ng-container>
+
+    <!-- Login Column -->
+    <ng-container matColumnDef="login">
+      <th mat-header-cell *matHeaderCellDef> info </th>
+      <td class="pointer"  mat-cell *matCellDef="let element">
+        <app-user-data [userData]=element></app-user-data>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr   mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+
+
+
+
+
+

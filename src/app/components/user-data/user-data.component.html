@@ -1,0 +1,14 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <a routerLink="">{{userData.login}}</a>
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <a href=""><img src="{{userData.avatar_url}}" ></a>
+
+  </mat-expansion-panel>
+</mat-accordion>

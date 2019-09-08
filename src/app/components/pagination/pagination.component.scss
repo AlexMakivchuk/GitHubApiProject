@@ -1,0 +1,38 @@
+mat-form-field {
+  margin-right: 12px;
+}
+table {
+  width: 100%;
+}
+.pointer{
+  cursor: pointer;
+}
+.pointer:active{
+  background: gray;
+}
+div.form{
+  margin: 10px;
+  margin-top: 30px;
+
+}
+span{
+
+}
+#username{
+  margin: 20px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 40%;
+}
+.form-help-text{
+  color: red;
+}
+.error{
+  height: 50px;
+}

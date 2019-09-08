@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {UserService} from "./user.service";
+import {UserFindService} from "./shared/services/user-find.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TestISolution';
+  arr = [];
+  name = '';
+
+  constructor(
+    public userService: UserFindService
+  ) {}
+  Click() {
+
+  }
 }
