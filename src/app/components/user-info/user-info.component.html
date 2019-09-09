@@ -1,1 +1,12 @@
-<p>user-info works!</p>
+<div style="text-align: center;margin: 50px;" @fade>
+  <a routerLink="/pagination">Назад к таблице</a>
+  <div>
+    <ul>
+      <li><b>Id пользователя: </b>{{userData.id}}</li>
+      <li><b>Имя пользователя: </b>{{userData.name}}</li>
+      <li><b>Количество репозиториев: </b>{{userData.public_repos}}</li>
+      <li><a target="_blank" href="{{userData.html_url}}">Ссылка на GitHub</a></li>
+    </ul>
+
+  </div>
+</div>

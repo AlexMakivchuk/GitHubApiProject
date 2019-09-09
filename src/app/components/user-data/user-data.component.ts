@@ -11,7 +11,9 @@ export class UserDataComponent implements OnInit {
   panelOpenState = false;
   constructor() {
     }
+  private openUserInfo(){
 
+  }
   ngOnInit() {
 
   }

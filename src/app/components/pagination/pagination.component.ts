@@ -1,18 +1,20 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {UserFindService} from "../../shared/services/user-find.service";
 import {MatPaginator,  PageEvent} from "@angular/material/paginator";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {IClientData} from "../../interfaces/client-data.interface";
+import {fadeStateTrigger} from "../../shared/animation/fade.animations";
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  styleUrls: ['./pagination.component.scss'],
+  animations: [fadeStateTrigger]
 })
 
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, AfterViewInit {
 
   private paginator: MatPaginator;
   @ViewChild(MatPaginator, {static: false}) set matPaginator(mp: MatPaginator) {
@@ -31,6 +33,7 @@ export class PaginationComponent implements OnInit {
   private searchingForm: FormGroup;
 
   constructor(
+    private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute,
     private userFindService: UserFindService
@@ -52,6 +55,14 @@ export class PaginationComponent implements OnInit {
         username: new FormControl('', [Validators.required, Validators.minLength(3)])
       }
     );
+    if( this.userFindService.usersItems !== null ) {
+      this.stateTable = true;
+      this.userFindService.usersItems
+      this.dataSource= this.userFindService.usersItems;
+      setTimeout(() =>{
+        this.paginator.firstPage();
+      },150)
+    }
   }
 
   catchPaginationChangeEvent(catchedEvent: PageEvent) {
@@ -64,17 +75,20 @@ export class PaginationComponent implements OnInit {
 
   private loadPage() {
 
-    this.userFindService.getUsers(this.searchingForm.value.username, this.index, this.pageSize).subscribe(x => {
+    this.userFindService.getUsers(this.searchingForm.value.username, this.index, this.pageSize).subscribe((x) => {
       this.length = x.total_count;
+      this.userFindService.usersItems = x.items;
       this.dataSource = x.items;
     });
   }
 
   private clickTr(element: IClientData) {
-    console.log(element);
-    this.http.get<string[]>(element.repos_url).subscribe((item) => {console.log(item.length)
-    })
-
+    this.userFindService.loadRepos(element);
+    setTimeout(() => {
+      this.router.navigate(['/User-Info'])
+    },400)
+  }
+  ngAfterViewInit() {
 
   }
 

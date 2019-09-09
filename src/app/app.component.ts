@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {UserService} from "./user.service";
 import {UserFindService} from "./shared/services/user-find.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,9 @@ import {UserFindService} from "./shared/services/user-find.service";
 })
 export class AppComponent {
   title = 'TestISolution';
-  arr = [];
   name = '';
 
-  constructor(
-    public userService: UserFindService
-  ) {}
-  Click() {
-
+  constructor(public router: Router) {
+    this.router.navigate(['/pagination'])
   }
 }
