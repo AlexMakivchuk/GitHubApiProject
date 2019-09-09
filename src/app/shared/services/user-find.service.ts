@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
-import {ITableResponse} from "../../interfaces/table-response.interface";
-import {IClientData} from "../../interfaces/client-data.interface";
-import {IUserData} from "../../interfaces/user-data.interface";
-import {Router} from "@angular/router";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
+import {ITableResponse} from '../../interfaces/table-response.interface';
+import {IClientData} from '../../interfaces/client-data.interface';
+import {IUserData} from '../../interfaces/user-data.interface';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,19 +20,19 @@ export class UserFindService {
               private router: Router) {
   }
 
-  public getUsers(name: string, pageValue: number, countPages):Observable<ITableResponse> {
+  public getUsers(name: string, pageValue: number, countPages): Observable<ITableResponse> {
     return this.http.get<ITableResponse>(this.buildUrl(name, pageValue, countPages ));
   }
 
-  private buildUrl (name: string, pageValue: number, countPages: number){
-    return this.prefix + "search/users?q=" + name + "&page=" + pageValue + "&per_page=" + countPages;
+  private buildUrl(name: string, pageValue: number, countPages: number) {
+    return this.prefix + 'search/users?q=' + name + '&page=' + pageValue + '&per_page=' + countPages;
   }
   public loadRepos(element: IClientData) {
     this.http.get(element.url).subscribe((item: IUserData) => {
-    this.userInfo= item;
-      setTimeout(() => {
-        this.router.navigate(['/User-Info'])
-      },200)
-    })
+    this.userInfo = item;
+    setTimeout(() => {
+        this.router.navigate(['/User-Info']);
+      }, 200);
+    });
   }
 }

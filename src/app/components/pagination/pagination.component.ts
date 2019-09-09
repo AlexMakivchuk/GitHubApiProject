@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {UserFindService} from "../../shared/services/user-find.service";
-import {MatPaginator,  PageEvent} from "@angular/material/paginator";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {IClientData} from "../../interfaces/client-data.interface";
-import {fadeStateTrigger} from "../../shared/animation/fade.animations";
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {UserFindService} from '../../shared/services/user-find.service';
+import {MatPaginator,  PageEvent} from '@angular/material/paginator';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {IClientData} from '../../interfaces/client-data.interface';
+import {fadeStateTrigger} from '../../shared/animation/fade.animations';
 
 @Component({
   selector: 'app-pagination',
@@ -23,7 +23,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['id', 'login'];
   private dataSource = [];
-  private stateTable= false;
+  private stateTable = false;
   private  index = 1;
   private length = 1000;
   private pageSize = 25;
@@ -45,9 +45,9 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.stateTable = true;
     this.index = 1;
     this.loadPage();
-    setTimeout(() =>{
+    setTimeout(() => {
       this.paginator.firstPage();
-    },50)
+    }, 50);
   }
 
   ngOnInit() {
@@ -55,13 +55,12 @@ export class PaginationComponent implements OnInit, AfterViewInit {
         username: new FormControl('', [Validators.required, Validators.minLength(3)])
       }
     );
-    if( this.userFindService.usersItems !== null ) {
+    if ( this.userFindService.usersItems !== null ) {
       this.stateTable = true;
-      this.userFindService.usersItems
-      this.dataSource= this.userFindService.usersItems;
-      setTimeout(() =>{
+      this.dataSource = this.userFindService.usersItems;
+      setTimeout(() => {
         this.paginator.firstPage();
-      },150)
+      }, 150);
     }
   }
 
