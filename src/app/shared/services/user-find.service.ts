@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {ITableResponse} from "../../interfaces/table-response.interface";
 import {IClientData} from "../../interfaces/client-data.interface";
 import {IUserData} from "../../interfaces/user-data.interface";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UserFindService {
  public userInfo: IUserData;
  public prefix = environment.backEndUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
   }
 
   public getUsers(name: string, pageValue: number, countPages):Observable<ITableResponse> {
@@ -28,9 +30,9 @@ export class UserFindService {
   public loadRepos(element: IClientData) {
     this.http.get(element.url).subscribe((item: IUserData) => {
     this.userInfo= item;
+      setTimeout(() => {
+        this.router.navigate(['/User-Info'])
+      },200)
     })
-  }
-  public buildReposUrl(){
-
   }
 }

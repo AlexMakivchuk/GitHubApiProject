@@ -84,9 +84,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
   private clickTr(element: IClientData) {
     this.userFindService.loadRepos(element);
-    setTimeout(() => {
-      this.router.navigate(['/User-Info'])
-    },400)
   }
   ngAfterViewInit() {
 

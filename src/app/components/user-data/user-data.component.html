@@ -9,7 +9,7 @@
 
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div>{{userData.login}}</div><img src="{{userData.avatar_url}}" >
+    <div class="login" (click)="openUserInfo(userData)">{{userData.login}}</div><img src="{{userData.avatar_url}}" >
 
   </mat-expansion-panel>
 </mat-accordion>

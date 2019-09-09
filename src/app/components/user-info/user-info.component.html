@@ -1,6 +1,7 @@
-<div style="text-align: center;margin: 50px;" @fade>
-  <a routerLink="/pagination">Назад к таблице</a>
-  <div>
+<div class="user-info" @fade>
+  <a routerLink="/pagination"><b>Назад к таблице</b></a>
+  <div class="user">
+    <img src="{{userData.avatar_url}}">
     <ul>
       <li><b>Id пользователя: </b>{{userData.id}}</li>
       <li><b>Имя пользователя: </b>{{userData.name}}</li>

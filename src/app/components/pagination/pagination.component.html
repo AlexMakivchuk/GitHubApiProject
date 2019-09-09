@@ -1,5 +1,5 @@
-<div>
-<div style="margin: 30px;">
+<div class="paginator" @fade>
+<div >
   <form [formGroup]="searchingForm"  (ngSubmit)="onSubmit()">
     <div class="form">
 
@@ -42,7 +42,7 @@
     <ng-container matColumnDef="id">
       <th  mat-header-cell *matHeaderCellDef> id </th>
       <td class="pointer" (click)="clickTr(element)" mat-cell *matCellDef="let element">
-        <span>{{element.id}}</span>   </td>
+        <span class="elemId">{{element.id}}</span>   </td>
     </ng-container>
 
     <!-- Login Column -->
